@@ -1,0 +1,19 @@
+# Read by `prek` (in buildInputs) — a drop-in, single-binary Rust
+# implementation of pre-commit, same config format.
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-added-large-files
+      - id: check-merge-conflict
+
+  - repo: local
+    hooks:
+      - id: nix-fmt
+        name: nix fmt
+        entry: nix fmt
+        language: system
+        files: '\.nix$'
+        pass_filenames: false

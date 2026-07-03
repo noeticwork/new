@@ -1,0 +1,14 @@
+when:
+  - event: [push, pull_request, tag]
+
+steps:
+  - name: check-flake
+    image: nixos/nix:latest
+    commands:
+      - nix --experimental-features "nix-command flakes" flake check
+
+  # Uncomment once packages.<system>.default is defined in flake.nix:
+  # - name: build
+  #   image: nixos/nix:latest
+  #   commands:
+  #     - nix --experimental-features "nix-command flakes" build .#

@@ -1,0 +1,34 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+[*.nix]
+indent_size = 2
+
+[*.py]
+indent_size = 4
+
+[*.rs]
+indent_size = 4
+
+[*.{cs,csproj,fsproj}]
+indent_size = 4
+
+# Godot's own style guide specifies tabs for GDScript.
+[*.gd]
+indent_style = tab
+
+[*.zig]
+indent_size = 4
+
+[justfile]
+indent_size = 4
+
+[*.md]
+trim_trailing_whitespace = false

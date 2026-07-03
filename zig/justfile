@@ -1,0 +1,61 @@
+# ------------------------------------------------------------
+# Nix + just project. Bare `just` lists recipes below.
+# ------------------------------------------------------------
+
+_default:
+    @just --list
+
+# -----------------------------------------------------------------
+# Flake management
+# -----------------------------------------------------------------
+
+# Update flake inputs
+update:
+    nix flake update
+
+# Check flake evaluation
+check:
+    nix flake check
+
+# Format the tree (uses the flake's `formatter` output)
+fmt:
+    nix fmt
+
+# -----------------------------------------------------------------
+# Build & run — no package output by default (dev shell only)
+# -----------------------------------------------------------------
+
+build:
+    @echo "No package configured. Add 'packages.<system>.default' to flake.nix, then: nix build .#"
+
+run:
+    @echo "No package configured. Add 'packages.<system>.default' to flake.nix, then: nix run .#"
+
+# Enter the dev shell (same as direnv, useful for CI / non-direnv use)
+enter:
+    nix develop
+
+# Remove build artifacts
+clean:
+    rm -rf result result-* .direnv
+
+# -----------------------------------------------------------------
+# Git hooks (prek — drop-in for pre-commit, single Rust binary)
+# -----------------------------------------------------------------
+
+hooks-install:
+    prek install
+
+hooks-run:
+    prek run --all-files
+
+# -----------------------------------------------------------------
+# Utility
+# -----------------------------------------------------------------
+
+banner:
+    cat banner.txt 2>/dev/null || echo "No banner.txt found"
+
+# Secrets and CI recipes live in the secretspec.toml / .woodpecker.yml
+# addon templates (see repo README) — paste their recipe blocks in here
+# if you pull one in.

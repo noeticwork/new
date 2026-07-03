@@ -3,17 +3,48 @@
 
   outputs = { self }: {
     templates = {
-      default = {
-        path = ./template;
-        description = "Minimal cross-platform dev shell: nix + just, bring your own tech";
-        welcomeText = ''
-          Minimal Nix + Just scaffold initialized.
+      # --- base templates: full projects, run in an empty dir ---
 
-          - `direnv allow` (or `nix develop`) to enter the shell
-          - bare `just` lists recipes (currently all commented stubs)
-          - pin your toolchain in `flake.nix` under `buildInputs`
-          - edit `banner.txt` to reskin the shell banner
-        '';
+      default = {
+        path = ./default;
+        description = "Minimal cross-platform dev shell: nix + just + prek, bring your own tech";
+      };
+
+      python = {
+        path = ./python;
+        description = "Python dev shell: python312 + uv, plus the shared just/prek scaffold";
+      };
+
+      rust = {
+        path = ./rust;
+        description = "Rust dev shell: cargo/rustc/clippy/rustfmt/rust-analyzer, plus the shared scaffold";
+      };
+
+      godot = {
+        path = ./godot;
+        description = "Godot dev shell: godotPackages_4_6 + bun, plus the shared scaffold";
+      };
+
+      dotnet = {
+        path = ./dotnet;
+        description = ".NET dev shell: dotnetCorePackages.sdk_10_0, plus the shared scaffold";
+      };
+
+      zig = {
+        path = ./zig;
+        description = "Zig dev shell via mitchellh/zig-overlay, plus the shared scaffold";
+      };
+
+      # --- addon templates: single files, run inside an already-inited project ---
+
+      secrets = {
+        path = ./secrets;
+        description = "Addon: drop-in secretspec.toml (declarative secrets) — see its header for flake.nix wiring notes";
+      };
+
+      woodpecker = {
+        path = ./woodpecker;
+        description = "Addon: drop-in .woodpecker.yml (CI, checks the flake) — no flake.nix changes needed";
       };
     };
   };
